@@ -23,10 +23,16 @@ contract DiceGame {
         require(msg.value >= 0.002 ether, "Failed to send enough value");
 
         bytes32 prevHash = blockhash(block.number - 1);
+        console.log("prevHash uint256:");
+        console.log(uint256(prevHash));
+        
+        
         bytes32 hash = keccak256(abi.encodePacked(prevHash, address(this), nonce));
+       
         uint256 roll = uint256(hash) % 16;
-
+        console.log("THE PREVIOUS BLOCK NUMBER IS", block.number-1);
         console.log("THE ROLL IS ",roll);
+        console.log("THE NONCE IS ", nonce);
 
         nonce++;
         prize += ((msg.value * 40) / 100);
